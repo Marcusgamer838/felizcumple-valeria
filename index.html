@@ -1,119 +1,369 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>💖 Para Valeria 💖</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Para Valeria — Feliz Cumpleaños 💖</title>
+<meta name="description" content="Carta de amor para Valeria — minimal, retro y romántica, con música y animaciones.">
+<meta property="og:title" content="Para Valeria — Feliz Cumpleaños 💖">
+<meta property="og:description" content="Una carta romántica minimalista con fondo retro y música.">
+<meta property="og:image" content="cherry_blossoms.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Tiny heart favicon (inline SVG data URI) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23ff9ac7' d='M12 21s-7.5-4.8-10-8.2C-0.4 7.6 4 3 6.8 5.1 8.2 6.2 8.9 7.9 12 10c3.1-2.1 3.8-3.8 5.2-4.9C20 3 24.4 7.6 22 12.8 19.5 16.2 12 21 12 21z'/%3E%3C/svg%3E">
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Great+Vibes&family=Open+Sans:wght@300;400&display=swap');
-
-  body {
-    margin: 0;
-    padding: 0;
-    background: url('cherry_blossoms.jpg') no-repeat center center fixed;
-    background-size: cover;
-    color: #fff;
-    font-family: 'Open Sans', sans-serif;
-    overflow-x: hidden;
+  :root{
+    --bg-overlay: rgba(7,10,15,0.54);
+    --accent-1: #ff9ac7;
+    --accent-2: #ffb7d5;
+    --cream: #fff7f8;
+    --muted: rgba(255,230,240,0.6);
+    --glass: rgba(255,255,255,0.06);
+    --max-width: 920px;
   }
 
-  .overlay {
-    background: rgba(10, 10, 15, 0.6);
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    z-index: -1;
+  /* Reset & base */
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: url('cherry_blossoms.jpg') center/cover no-repeat fixed;
+    color:var(--cream);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    overflow-x:hidden;
   }
 
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 50px 20px 100px;
-    text-align: center;
+  /* Soft dark overlay so text reads well on bg */
+  .page-overlay{
+    position:fixed; inset:0;
+    background: linear-gradient(180deg, rgba(10,8,12,0.55) 0%, rgba(8,6,10,0.42) 100%);
+    pointer-events:none;
+    z-index:0;
   }
 
-  .image-heart {
-    width: 300px;
-    border-radius: 20px;
-    margin-top: 40px;
-    box-shadow: 0 0 30px rgba(255, 182, 193, 0.4);
+  /* Header / nav small */
+  header.site-header{
+    position:sticky; top:0; z-index:20;
+    display:flex;align-items:center;justify-content:space-between;
+    gap:12px;padding:12px 20px;
+    backdrop-filter: blur(6px);
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+  .brand{
+    display:flex;gap:10px;align-items:center;
+  }
+  .monogram{
+    width:44px;height:44px;border-radius:8px;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;color:#2b0a14;
+    background: linear-gradient(135deg,var(--accent-1),var(--accent-2));
+    box-shadow: 0 6px 20px rgba(203,105,137,0.12);
+    font-family: 'Playfair Display', serif;
+  }
+  .brand .name{
+    font-family: 'Playfair Display', serif;
+    font-size:1rem;color:var(--muted);
+    line-height:1;
+  }
+  .brand .tag{font-size:0.8rem;color:rgba(255,230,240,0.7)}
+
+  /* Top marquee messages */
+  .top-banner{
+    overflow:hidden; white-space:nowrap; width:100%;
+    border-top:1px solid rgba(255,255,255,0.02);
+    border-bottom:1px solid rgba(255,255,255,0.02);
+    background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  }
+  .marquee{
+    display:inline-block;padding:10px 0;
+    font-family: 'Great Vibes', cursive;
+    font-size:1.2rem;color:var(--accent-1);
+    animation: marquee 24s linear infinite;
+    padding-left:100%;
+  }
+  @keyframes marquee{
+    0%{transform:translateX(0)}
+    100%{transform:translateX(-100%)}
+  }
+
+  /* Container */
+  main{
+    position:relative; z-index:5;
+    max-width:var(--max-width); margin: 40px auto; padding: 40px 22px;
+    display:block;
+  }
+
+  /* Intro overlay (full-screen) */
+  .intro {
+    position:fixed; inset:0; z-index:40; display:flex;align-items:center;justify-content:center;
+    background: linear-gradient(180deg, rgba(8,6,10,0.95), rgba(8,6,10,0.75));
+    color:var(--cream); text-align:center; padding:24px;
+    transition:opacity .8s ease, visibility .8s;
+  }
+  .intro.hidden{opacity:0; visibility:hidden;}
+  .intro h2{font-family:'Playfair Display',serif;font-size:2.2rem;margin:0 0 12px;color:var(--accent-1)}
+  .intro p{margin:0;color:rgba(255,235,241,0.85)}
+
+  /* Card (paper) */
+  .card {
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+    border-radius:18px;
+    padding:28px;
+    box-shadow: 0 12px 40px rgba(5,6,8,0.6);
+    border: 1px solid rgba(255,255,255,0.04);
+    backdrop-filter: blur(6px);
   }
 
   .title {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.5em;
-    color: #ffc4d6;
-    margin-bottom: 20px;
+    font-family:'Playfair Display', serif;
+    color:var(--accent-1); font-size:2.1rem;margin:0 0 12px;
+    text-align:center;
   }
+  .subtitle { color:var(--muted); font-size:0.95rem;margin-bottom:18px;text-align:center; }
 
+  /* Image */
+  .hero {
+    display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap;justify-content:center;
+  }
+  .hero .image {
+    width:320px; max-width:90%;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow: 0 10px 30px rgba(255,150,190,0.12);
+    transform: translateY(0);
+  }
+  .hero img{display:block;width:100%;height:auto;object-fit:cover;display:block;loading:lazy;}
+
+  /* Poem area */
   .poem {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(6px);
-    border-radius: 20px;
-    padding: 30px;
-    line-height: 1.8;
-    font-size: 1.1em;
-    color: #ffeaf2;
-    text-align: justify;
-    box-shadow: 0 0 20px rgba(255, 192, 203, 0.1);
-    font-family: 'Playfair Display', serif;
+    flex:1; min-width:260px; max-width:540px; text-align:justify;
+    font-family:'Playfair Display', serif; font-size:1.05rem; line-height:1.7;
+    color:#fff; padding:16px 18px; border-radius:12px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+    border:1px solid rgba(255,255,255,0.02);
+    margin-top:10px;
   }
 
+  /* Signature (typed animation) */
   .signature {
-    font-family: 'Great Vibes', cursive;
-    font-size: 1.8em;
-    margin-top: 40px;
-    color: #ffd6e8;
+    font-family:'Great Vibes', cursive; font-size:1.8rem; color:var(--accent-1);
+    margin-top:18px; text-align:right;
+  }
+  .signature .typed { border-right: 2px solid rgba(255,230,240,0.65); padding-right:6px; }
+
+  /* Music button (pulse) */
+  .actions{display:flex;gap:12px;align-items:center;justify-content:center;margin-top:18px}
+  .btn-music{
+    background: linear-gradient(90deg,var(--accent-1),var(--accent-2));
+    color:#2b0a14;border:none;padding:12px 22px;border-radius:28px;font-weight:600;
+    box-shadow: 0 10px 30px rgba(255,140,180,0.12);
+    cursor:pointer; transform: translateZ(0);
+    transition: transform .18s ease, box-shadow .18s;
+    position:relative;
+  }
+  .btn-music:hover{transform:translateY(-4px)}
+  /* pulse */
+  .btn-music::after{
+    content:""; position:absolute; inset:0;border-radius:28px; z-index:-1;
+    box-shadow: 0 0 0 0 rgba(255,150,190,0.16);
+    animation: pulse 2.6s infinite;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(255,150,190,0.12)}
+    70%{box-shadow:0 0 0 18px rgba(255,150,190,0.02)}
+    100%{box-shadow:0 0 0 0 rgba(255,150,190,0)}
   }
 
-  .button {
-    background: linear-gradient(90deg, #ff9ac7, #ffb7d5);
-    border: none;
-    padding: 12px 30px;
-    border-radius: 30px;
-    color: #fff;
-    font-size: 1em;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 30px;
-    box-shadow: 0 0 20px rgba(255, 150, 200, 0.3);
-    transition: 0.3s;
+  /* Floating hearts (subtle) */
+  .hearts { position:fixed; inset:0; pointer-events:none; z-index:2; overflow:hidden;}
+  .hearts .heart{
+    position:absolute; left:50%; bottom:-10vh; opacity:0.08;
+    font-size:22px; transform:translateX(-50%) translateY(0);
+    animation: floatUp linear infinite;
+  }
+  @keyframes floatUp{
+    0%{transform:translateY(0) scale(.9); opacity:0.06}
+    100%{transform:translateY(-120vh) scale(1.05); opacity:0.9}
   }
 
-  .button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 30px rgba(255, 150, 200, 0.5);
+  footer{ text-align:center; color:rgba(255,230,240,0.7); margin:36px 0 120px; font-size:0.9rem; }
+
+  /* Responsive */
+  @media (max-width:900px){
+    .hero{flex-direction:column;align-items:center}
+    .poem{max-width:100%}
+    .title{font-size:1.8rem}
+  }
+  @media (max-width:520px){
+    .marquee{font-size:1.05rem}
+    header.site-header{padding:10px 14px}
   }
 
-  footer {
-    margin-top: 80px;
-    font-size: 0.9em;
-    color: #ffdce9;
-  }
+  /* small 'reveal on scroll' utility */
+  .reveal{opacity:0; transform: translateY(12px); transition: opacity .7s ease, transform .7s ease;}
+  .reveal.visible{opacity:1; transform: translateY(0);}
 </style>
 </head>
 <body>
-  <div class="overlay"></div>
-  <div class="container">
-    <h1 class="title">💖 Para Valeria: La Luz de Mi Vida 💖</h1>
-    <img src="cb924511-7b24-4e0b-8abe-f51a0aa9f8b7.jpg" alt="Ilustración de amor" class="image-heart">
+  <div class="page-overlay" aria-hidden="true"></div>
 
-    <div class="poem">
-      <p>Valeria, mi amor, desde aquel primer encuentro, un instante robado, casi un leve acento, jamás mi alma pudo siquiera imaginar la senda luminosa que ibas a trazar.</p>
-      <p>No era solo un capricho, ni un dulce pasatiempo, sino el mismo destino marcando el buen tiempo. Te volviste, sin aviso, y de la forma más sentida, el centro de mi universo, el amor de mi vida.</p>
-      <p>Desde entonces, mi sol se niega a amanecer si la dulce noticia de tu voz no puedo tener. No existe un solo día, ni una sola jornada, en que no ansíe tu risa, tu mirada.</p>
-      <p>Me haces feliz de una forma tan pura y sencilla, con solo respirar cerca de mi orilla. Tu simple ser desarma cualquier temor, llenando cada espacio de incondicional calor.</p>
-      <p>Eres la melodía que mi silencio anhelaba, la paz que en la tormenta mi espíritu guardaba. En cada gesto tuyo, en tu alma transparente, encuentro mi refugio, mi más bello presente.</p>
-      <p>Te amo tanto, Valeria, que estas simples palabras, estos versos que hoy te ofrezco y que trazo entre guirnaldas, no son más que un pobre eco de la inmensidad que mi corazón contiene con total fidelidad.</p>
-      <p>Para demostrar mi amor no bastan letras ni papel, haría falta un océano y un cielo de miel. Pero quiero que lo sepas, hoy y cada mañana: Eres el todo que mi alma ama y reclama.</p>
+  <!-- Intro screen -->
+  <div id="intro" class="intro" role="dialog" aria-label="Introducción">
+    <div>
+      <h2>Una carta para Valeria</h2>
+      <p>Feliz cumpleaños 🌸 — guarda este recuerdo que armé con amor.</p>
+      <div style="height:18px"></div>
+      <button id="enterBtn" style="padding:10px 18px;border-radius:999px;border:none;background:linear-gradient(90deg,#ffd0e6,#ffc0dd);font-weight:600;cursor:pointer;">Ver carta</button>
     </div>
-
-    <div class="signature">Con amor, Marco 💌</div>
-
-    <button class="button" onclick="window.open('https://www.youtube.com/watch?v=D94triePAJE','_blank')">
-      🎵 Reproducir música
-    </button>
-
-    <footer>Hecho con todo mi amor 💗</footer>
   </div>
+
+  <!-- Header -->
+  <header class="site-header" role="banner">
+    <div class="brand">
+      <div class="monogram" aria-hidden="true">PV</div>
+      <div>
+        <div class="name">Para Valeria</div>
+        <div class="tag">Feliz Cumpleaños 🎂</div>
+      </div>
+    </div>
+    <nav aria-label="Enlaces">
+      <a href="#poema" style="text-decoration:none;color:rgba(255,230,240,0.8);margin-right:12px;font-weight:600">Poema</a>
+      <a href="#musica" style="text-decoration:none;color:rgba(255,230,240,0.6)">Música</a>
+    </nav>
+  </header>
+
+  <!-- Marquee -->
+  <div class="top-banner" aria-hidden="true">
+    <div class="marquee">💖 Te amo · Eres mi todo · Mi vida · Mi sol · Mi razón · Mi cielo · Mi inspiración · Contigo siempre 💖</div>
+  </div>
+
+  <!-- Floating hearts (several with varied timing) -->
+  <div class="hearts" aria-hidden="true">
+    <div class="heart" style="left:10%;font-size:20px;animation-duration:20s;animation-delay:0s">💗</div>
+    <div class="heart" style="left:30%;font-size:28px;animation-duration:26s;animation-delay:3s">💖</div>
+    <div class="heart" style="left:50%;font-size:18px;animation-duration:22s;animation-delay:7s">💗</div>
+    <div class="heart" style="left:72%;font-size:24px;animation-duration:24s;animation-delay:2s">💞</div>
+  </div>
+
+  <main>
+    <section class="card reveal" id="poema" aria-labelledby="title">
+      <h1 id="title" class="title">Para Valeria</h1>
+      <div class="subtitle">Feliz Cumpleaños — una carta desde el corazón</div>
+
+      <div class="hero" role="article" aria-label="Carta y retrato">
+        <figure class="image reveal">
+          <img src="cb924511-7b24-4e0b-8abe-f51a0aa9f8b7.jpg" alt="Ilustración romántica" loading="lazy">
+        </figure>
+
+        <div class="poem reveal" style="display:flex;flex-direction:column;justify-content:space-between;">
+          <div>
+            <p>Valeria, mi amor, desde aquel primer encuentro, un instante robado, casi un leve acento, jamás mi alma pudo siquiera imaginar la senda luminosa que ibas a trazar.</p>
+            <p>No era solo un capricho, ni un dulce pasatiempo, sino el mismo destino marcando el buen tiempo. Te volviste, sin aviso, y de la forma más sentida, el centro de mi universo, el amor de mi vida.</p>
+            <p>Desde entonces, mi sol se niega a amanecer si la dulce noticia de tu voz no puedo tener. No existe un solo día, ni una sola jornada, en que no ansíe tu risa, tu mirada.</p>
+            <p>Me haces feliz de una forma tan pura y sencilla, con solo respirar cerca de mi orilla. Tu simple ser desarma cualquier temor, llenando cada espacio de incondicional calor.</p>
+            <p>Eres la melodía que mi silencio anhelaba, la paz que en la tormenta mi espíritu guardaba. En cada gesto tuyo, en tu alma transparente, encuentro mi refugio, mi más bello presente.</p>
+            <p>Te amo tanto, Valeria, que estas simples palabras, estos versos que hoy te ofrezco y que trazo entre guirnaldas, no son más que un pobre eco de la inmensidad que mi corazón contiene con total fidelidad.</p>
+            <p>Para demostrar mi amor no bastan letras ni papel, haría falta un océano y un cielo de miel. Pero quiero que lo sepas, hoy y cada mañana: Eres el todo que mi alma ama y reclama.</p>
+          </div>
+
+          <div style="margin-top:14px;display:flex;flex-direction:column;align-items:flex-end;">
+            <div class="signature">Con amor, <span class="typed" id="typedName"></span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions reveal" id="musica">
+        <button class="btn-music" id="playBtn" aria-label="Reproducir música">🎵 Reproducir música</button>
+      </div>
+
+    </section>
+
+    <footer>
+      © <span id="year"></span> Con amor, Marco. Diseñado con cariño.
+    </footer>
+  </main>
+
+<script>
+  // ---------- Intro logic ----------
+  const intro = document.getElementById('intro');
+  const enterBtn = document.getElementById('enterBtn');
+  enterBtn.addEventListener('click', () => {
+    intro.classList.add('hidden');
+    setTimeout(()=> intro.style.display='none', 900);
+    // reveal elements after intro
+    revealAll();
+  });
+
+  // If user clicks anywhere, also dismiss for quick access
+  intro.addEventListener('click', (e)=> {
+    if(e.target === intro) { enterBtn.click(); }
+  });
+
+  // ---------- Typed signature ----------
+  const typedTarget = document.getElementById('typedName');
+  const name = 'Marco 💌';
+  let tI = 0;
+  function typeName(){
+    if(tI <= name.length){
+      typedTarget.textContent = name.slice(0, tI);
+      tI++;
+      setTimeout(typeName, 120);
+    }
+  }
+  // Start typing when poem visible
+  function revealAll(){
+    // trigger reveal observers and typing
+    typeName();
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+  }
+
+  // If user opens without interacting, set small delay to hide intro
+  window.addEventListener('load', ()=> {
+    document.getElementById('year').textContent = new Date().getFullYear();
+    // if they don't interact, auto-hide intro after 4s
+    setTimeout(()=> {
+      if(intro && !intro.classList.contains('hidden')) {
+        intro.classList.add('hidden'); setTimeout(()=> intro.style.display='none', 900);
+        revealAll();
+      }
+    }, 4200);
+  });
+
+  // ---------- Reveal on scroll (fallback) ----------
+  // Elements already marked .reveal are shown when in viewport (for long screens)
+  const revealObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, {threshold: 0.12});
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // ---------- Music button: opens YouTube in new tab ----------
+  document.getElementById('playBtn').addEventListener('click', ()=>{
+    window.open('https://www.youtube.com/watch?v=D94triePAJE', '_blank');
+  });
+
+  // ---------- Accessibility: keyboard shortcut P to open music ----------
+  window.addEventListener('keyup', (e)=>{
+    if(e.key.toLowerCase() === 'p'){
+      document.getElementById('playBtn').click();
+    }
+  });
+
+  // ---------- Subtle focus styles for keyboard users ----------
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Tab') document.body.classList.add('show-focus');
+  });
+
+  // ---------- Performance tip: lazy images already set; no external libs required ----------
+</script>
 </body>
 </html>
