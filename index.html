@@ -5,182 +5,326 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Feliz Cumpleaños Valeria 💖</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <!-- Fuentes -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg1:#05040a;
-      --bg2:#0b1722;
-      --accent1:#ff6ea3;
-      --accent2:#c69cf0;
-      --accent3:#7fb3ff;
-      --text:#f3f4f8;
-      --muted:#aeb9cf;
+      --bg1: #05040a;
+      --bg2: #0b1220;
+      --muted: #aeb9cf;
+      --accent-pink: #ff6ea3;
+      --accent-lilac: #c69cf0;
+      --accent-blue: #7fb3ff;
+      --glass: rgba(255,255,255,0.03);
+      --card-border: rgba(255,255,255,0.04);
+      --text: #eef3fb;
     }
 
-    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg1),var(--bg2));color:var(--text);font-family:'Poppins',system-ui,Segoe UI,Roboto,Arial;}
-    .wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:48px 20px 80px;position:relative;overflow:hidden;}
+    /* Base */
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg1),var(--bg2));color:var(--text);font-family:'Poppins',system-ui,Segoe UI,Roboto,Arial; -webkit-font-smoothing:antialiased;}
+    .page{min-height:100vh;display:flex;flex-direction:column;align-items:center;gap:28px;padding:36px 20px 72px;position:relative;overflow:hidden;}
 
+    /* Clean static "fog" for depth (no motion) */
     .bg-fog{
-      position:fixed;inset:0;pointer-events:none;z-index:0;mix-blend-mode:screen;opacity:0.45;
+      position:fixed;inset:0;z-index:0;pointer-events:none;mix-blend-mode:screen;opacity:0.45;
       background:
-        radial-gradient(600px 300px at 10% 20%, rgba(198,156,240,0.06), transparent 20%),
-        radial-gradient(500px 260px at 80% 80%, rgba(127,179,255,0.05), transparent 24%),
-        radial-gradient(700px 320px at 40% 60%, rgba(255,110,163,0.04), transparent 22%);
-      animation: fogForm 4s ease-in-out 1 forwards;
-    }
-    @keyframes fogForm{
-      0%{opacity:0;transform:scale(0.995) translateY(6px)}
-      100%{opacity:0.45;transform:scale(1) translateY(0)}
+        radial-gradient(600px 300px at 10% 18%, rgba(198,156,240,0.06), transparent 18%),
+        radial-gradient(500px 260px at 82% 82%, rgba(127,179,255,0.05), transparent 22%),
+        radial-gradient(700px 320px at 42% 62%, rgba(255,110,163,0.04), transparent 22%);
     }
 
-    .content{width:100%;max-width:980px;z-index:2;display:flex;flex-direction:column;align-items:center;gap:28px;}
+    /* Header (left-aligned like a letter) */
+    header{
+      width:100%;max-width:980px;z-index:2;display:flex;align-items:flex-start;gap:18px;padding:6px 10px;
+    }
+    .header-left{
+      flex:0 0 360px; /* left column width */
+      display:flex;flex-direction:column;align-items:flex-start;gap:8px;
+      padding-left:6px;
+    }
+    .phrase{
+      font-family:'Great Vibes', cursive;
+      font-size:34px;
+      color:var(--accent-pink);
+      line-height:1;
+      letter-spacing:0.6px;
+      text-shadow: 0 6px 22px rgba(198,156,240,0.06);
+      opacity:0;
+      transform:translateY(8px);
+      animation: phraseIn .9s ease-out forwards;
+    }
+    .phrase:nth-child(1){animation-delay:0.15s}
+    .phrase:nth-child(2){animation-delay:0.3s;color:var(--accent-lilac);font-size:30px}
+    .phrase:nth-child(3){animation-delay:0.45s;color:var(--accent-blue);font-size:28px}
+    .phrase:nth-child(4){animation-delay:0.6s;color:var(--accent-pink);font-size:26px}
 
+    @keyframes phraseIn {
+      from {opacity:0; transform:translateY(8px) scale(0.996)}
+      to {opacity:1; transform:translateY(0) scale(1)}
+    }
+
+    /* Right area (visual center with image + poem) */
+    .main-area{flex:1;display:flex;flex-direction:column;align-items:center;gap:20px;z-index:2;max-width:560px;}
+
+    /* Image container */
     .image-wrap{
-      position:relative;width:100%;max-width:560px;border-radius:20px;padding:12px;
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border:1px solid rgba(255,255,255,0.04);box-shadow:0 10px 40px rgba(0,0,0,0.6), inset 0 0 40px rgba(255,110,163,0.02);
-      display:flex;align-items:center;justify-content:center;
+      position:relative;width:100%;border-radius:14px;padding:12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid var(--card-border);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.65);
+      display:flex;align-items:center;justify-content:center;overflow:hidden;
     }
-    .image-wrap img{display:block;width:100%;height:auto;border-radius:12px;box-shadow:0 18px 50px rgba(0,0,0,0.6);}
+    .image-wrap img{
+      width:100%;height:auto;border-radius:10px;display:block;box-shadow:0 18px 60px rgba(0,0,0,0.65);
+      transform:translateZ(0);
+    }
 
+    /* Subtle luminous frame around image */
+    .image-wrap::after{
+      content:"";
+      position:absolute;inset:6px;border-radius:12px;
+      background: radial-gradient(circle at 40% 30%, rgba(255,110,163,0.06), transparent 20%),
+                  radial-gradient(circle at 70% 70%, rgba(127,179,255,0.04), transparent 22%);
+      pointer-events:none;
+      filter: blur(18px);
+      z-index:0;
+    }
+
+    /* Hearts canvas positioned over the image area (but inside image-wrap) */
     .hearts-canvas{
-      position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;border-radius:12px;
-      z-index:1;
+      position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:1;border-radius:10px;
     }
 
+    /* Poem card (minimal) */
     .poem{
-      width:100%;max-width:900px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);
-      border-radius:16px;padding:34px;backdrop-filter:blur(6px);box-shadow:0 8px 30px rgba(0,0,0,0.55);
-      line-height:1.7;font-size:18px;color:var(--text);
-      text-shadow:0 0 8px rgba(0,0,0,0.4);
+      width:100%;background:var(--glass);border-radius:12px;padding:22px;border:1px solid rgba(255,255,255,0.03);backdrop-filter:blur(6px);
+      box-shadow:0 8px 30px rgba(0,0,0,0.6);color:var(--text);font-size:16px;line-height:1.7;
     }
-    .poem h1{font-family:'Playfair Display',serif;font-size:46px;margin:0 0 18px;text-align:center;color:var(--accent1);font-weight:700;letter-spacing:0.6px;text-shadow:0 0 20px rgba(255,110,163,0.45);}
+    .poem h3{font-family:'Great Vibes';font-size:28px;margin:0 0 12px;color:var(--accent-lilac);letter-spacing:0.6px}
+    .poem p{margin:0;color:var(--text)}
 
+    /* Button */
+    .cta-wrap{text-align:center;margin-top:14px}
     .play-btn{
-      display:inline-block;margin-top:18px;padding:14px 32px;border-radius:14px;border:1px solid rgba(255,110,163,0.28);
-      background:linear-gradient(90deg, rgba(255,110,163,0.12), rgba(255,182,203,0.04));
-      color:var(--text);font-weight:700;font-size:18px;cursor:pointer;position:relative;overflow:hidden;
-      box-shadow:0 8px 30px rgba(255,110,163,0.06);
+      display:inline-block;padding:12px 28px;border-radius:12px;border:1px solid rgba(255,110,163,0.18);
+      background:linear-gradient(90deg, rgba(255,110,163,0.08), rgba(255,182,203,0.03));
+      color:var(--text);font-weight:700;font-size:16px;cursor:pointer;position:relative;overflow:hidden;
     }
-    .play-btn::before{
-      content:"";position:absolute;left:-120%;top:0;width:60%;height:100%;
-      background:linear-gradient(120deg, transparent, rgba(255,255,255,0.12), transparent);
-      transform:skewX(-20deg);transition:left .65s ease;
-    }
+    .play-btn::before{content:"";position:absolute;left:-120%;top:0;width:60%;height:100%;background:linear-gradient(120deg,transparent, rgba(255,255,255,0.08), transparent);transform:skewX(-18deg);transition:left .6s}
     .play-btn:hover::before{left:160%}
-    .play-btn:active{transform:scale(0.99) translateY(1px);}
+    .play-btn:active{transform:translateY(1px)}
 
-    .overlay{
-      position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:60;pointer-events:none;
-      opacity:0;transition:opacity .25s;
-    }
-    .overlay.show{pointer-events:auto;opacity:1}
-    .overlay .box{
-      background:linear-gradient(180deg, rgba(0,0,0,0.7), rgba(10,6,10,0.55));
-      border:1px solid rgba(255,110,163,0.12);padding:22px 28px;border-radius:14px;text-align:center;color:var(--text);
-      backdrop-filter:blur(6px);box-shadow:0 12px 40px rgba(0,0,0,0.6);
-      max-width:90%;font-size:20px;
+    /* Overlay message */
+    .overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:60;pointer-events:none;opacity:0;transition:opacity .2s}
+    .overlay.show{opacity:1;pointer-events:auto}
+    .overlay .box{background:linear-gradient(180deg, rgba(10,8,12,0.9), rgba(10,8,12,0.75));padding:18px 24px;border-radius:12px;border:1px solid rgba(255,110,163,0.08);font-size:18px;color:var(--text);backdrop-filter:blur(6px)}
+
+    /* Layout tweaks for desktop: left header + center main */
+    .layout{display:flex;gap:28px;width:100%;max-width:980px;align-items:flex-start;z-index:2}
+
+    /* Responsive: stack on small screens */
+    @media (max-width:880px){
+      .header-left{flex-basis:auto;order:2;align-items:center;text-align:center}
+      .phrase{font-size:26px}
+      .layout{flex-direction:column;align-items:center;padding:0 8px}
+      .header-left{width:100%;padding:0}
+      .main-area{order:1;width:100%}
+      .poem h3{font-size:22px}
     }
 
-    @media (max-width:720px){
-      .poem h1{font-size:30px}
-      .poem{font-size:16px;padding:22px}
-      .image-wrap{max-width:92%}
-    }
+    /* small note */
+    .note{font-size:13px;color:var(--muted);opacity:0.9;margin-top:6px}
 
-    .note{font-size:13px;color:var(--muted);margin-top:12px;text-align:center;}
   </style>
 </head>
-
 <body>
-  <div class="bg-fog"></div>
+  <div class="bg-fog" aria-hidden="true"></div>
 
-  <div class="wrap">
-    <div class="content">
-      <div class="image-wrap" id="imageWrap">
-        <canvas class="hearts-canvas" id="heartsCanvas"></canvas>
-        <img id="mainImg" src="cb924511-7b24-4e0b-8abe-f51a0aa9f8b7.jpg" alt="Para Valeria">
-      </div>
-
-      <div class="poem">
-        <h1>Para Valeria: La Luz de Mi Vida 💖</h1>
-        <p>
-        Valeria, mi amor, desde aquel primer encuentro, un instante robado, casi un leve acento, jamás mi alma pudo siquiera imaginar la senda luminosa que ibas a trazar.<br><br>
-        No era solo un capricho, ni un dulce pasatiempo, sino el mismo destino marcando el buen tiempo. Te volviste, sin aviso, y de la forma más sentida, el centro de mi universo, el amor de mi vida.<br><br>
-        Desde entonces, mi sol se niega a amanecer si la dulce noticia de tu voz no puedo tener. No existe un solo día, ni una sola jornada, en que no ansíe tu risa, tu mirada.<br><br>
-        Me haces feliz de una forma tan pura y sencilla, con solo respirar cerca de mi orilla. Tu simple ser desarma cualquier temor, llenando cada espacio de incondicional calor.<br><br>
-        Eres la melodía que mi silencio anhelaba, la paz que en la tormenta mi espíritu guardaba. En cada gesto tuyo, en tu alma transparente, encuentro mi refugio, mi más bello presente.<br><br>
-        Te amo tanto, Valeria, que estas simples palabras, estos versos que hoy te ofrezco y que trazo entre guirnaldas, no son más que un pobre eco de la inmensidad que mi corazón contiene con total fidelidad.<br><br>
-        Para demostrar mi amor no bastan letras ni papel, haría falta un océano y un cielo de miel. Pero quiero que lo sepas, hoy y cada mañana: Eres el todo que mi alma ama y reclama.
-        </p>
-        <p style="text-align:center;margin-top:18px;font-weight:700">Con todo mi amor, Marco 💫</p>
-        <div style="text-align:center;margin-top:18px;">
-          <button id="playBtn" class="play-btn">💞 Presiona aquí 💞</button>
+  <div class="page">
+    <div class="layout">
+      <!-- Left header (like a letter) -->
+      <header>
+        <div class="header-left" aria-hidden="false">
+          <div class="phrase">¡Feliz cumpleaños, Valeria! 💖</div>
+          <div class="phrase">Te amo con todo mi ser 💫</div>
+          <div class="phrase">Eres mi universo ✨</div>
+          <div class="phrase">Gracias por existir 🌹</div>
         </div>
-      </div>
+      </header>
 
-      <div class="note">Presiona el botón para escuchar la canción (se mostrará un mensaje 5 s antes de abrirla).</div>
+      <!-- Main area -->
+      <main class="main-area" role="main">
+        <div class="image-wrap" id="imageWrap">
+          <canvas class="hearts-canvas" id="heartsCanvas" aria-hidden="true"></canvas>
+          <!-- asegúrate que el nombre coincida con tu archivo de imagen -->
+          <img id="mainImg" src="cb924511-7b24-4e0b-8abe-f51a0aa9f8b7.jpg" alt="Imagen para Valeria">
+        </div>
+
+        <section class="poem" aria-labelledby="poemTitle">
+          <h3 id="poemTitle">Para Valeria: La Luz de Mi Vida 💖</h3>
+          <p>
+            Valeria, mi amor, desde aquel primer encuentro, un instante robado, casi un leve acento, jamás mi alma pudo siquiera imaginar la senda luminosa que ibas a trazar.<br><br>
+
+            No era solo un capricho, ni un dulce pasatiempo, sino el mismo destino marcando el buen tiempo. Te volviste, sin aviso, y de la forma más sentida, el centro de mi universo, el amor de mi vida.<br><br>
+
+            Desde entonces, mi sol se niega a amanecer si la dulce noticia de tu voz no puedo tener. No existe un solo día, ni una sola jornada, en que no ansíe tu risa, tu mirada.<br><br>
+
+            Me haces feliz de una forma tan pura y sencilla, con solo respirar cerca de mi orilla. Tu simple ser desarma cualquier temor, llenando cada espacio de incondicional calor.<br><br>
+
+            Eres la melodía que mi silencio anhelaba, la paz que en la tormenta mi espíritu guardaba. En cada gesto tuyo, en tu alma transparente, encuentro mi refugio, mi más bello presente.<br><br>
+
+            Te amo tanto, Valeria, que estas simples palabras, estos versos que hoy te ofrezco y que trazo entre guirnaldas, no son más que un pobre eco de la inmensidad que mi corazón contiene con total fidelidad.<br><br>
+
+            Para demostrar mi amor no bastan letras ni papel, haría falta un océano y un cielo de miel. Pero quiero que lo sepas, hoy y cada mañana: Eres el todo que mi alma ama y reclama.
+          </p>
+
+          <p style="text-align:center;margin-top:16px;font-weight:700">Con todo mi amor, Marco 💫</p>
+
+          <div class="cta-wrap" aria-hidden="false">
+            <button id="playBtn" class="play-btn">💞 Presiona aquí 💞</button>
+          </div>
+        </section>
+
+        <div class="note">Al presionar el botón verá un mensaje romántico 6 segundos y luego se abrirá la canción en la misma pestaña.</div>
+      </main>
     </div>
   </div>
 
-  <div class="overlay" id="overlay">
+  <!-- overlay message -->
+  <div class="overlay" id="overlay" aria-hidden="true">
     <div class="box">Escucha esta canción, mi amor 💖</div>
   </div>
 
   <script>
-    document.getElementById('playBtn').addEventListener('click', () => {
+    /* Play button: overlay 6s then redirect (same tab) */
+    document.getElementById('playBtn').addEventListener('click', function(){
       const overlay = document.getElementById('overlay');
       overlay.classList.add('show');
-      setTimeout(() => {
+      // ensure accessible announce (optional)
+      overlay.setAttribute('aria-hidden', 'false');
+      setTimeout(function(){
         window.location.href = 'https://www.youtube.com/watch?v=D94triePAJE';
-      }, 5000);
+      }, 6000);
     });
 
+    /* Hearts canvas: slow appearing hearts around image (optimized) */
     (function(){
-      const c = document.getElementById('heartsCanvas');
-      const w = document.getElementById('imageWrap');
-      const ctx = c.getContext('2d');
-      const hearts=[]; const max=36;
-      const colors=[
-        {r:255,g:110,b:163},{r:198,g:156,b:240},{r:127,g:179,b:255},{r:255,g:153,b:188}
+      const canvas = document.getElementById('heartsCanvas');
+      const wrap = document.getElementById('imageWrap');
+      if(!canvas || !wrap) return;
+      const ctx = canvas.getContext('2d');
+      let hearts = [];
+      const MAX = 34;
+      const palette = [
+        {r:255,g:110,b:163,a:0.95},
+        {r:198,g:156,b:240,a:0.92},
+        {r:127,g:179,b:255,a:0.9},
+        {r:255,g:153,b:188,a:0.9}
       ];
+
       function resize(){
-        const r=w.getBoundingClientRect();
-        c.width=r.width; c.height=r.height;
+        const r = wrap.getBoundingClientRect();
+        canvas.width = Math.max(180, Math.round(r.width));
+        canvas.height = Math.max(140, Math.round(r.height));
+        canvas.style.width = canvas.width + 'px';
+        canvas.style.height = canvas.height + 'px';
       }
+
       function makeHeart(){
-        const a=Math.random()*Math.PI*2;
-        const R=Math.min(c.width,c.height)/2*(0.3+Math.random()*0.7);
-        const cx=c.width/2+Math.cos(a)*R;
-        const cy=c.height/2+Math.sin(a)*R;
-        const col=colors[Math.floor(Math.random()*colors.length)];
-        return {x:cx,y:cy,dx:(Math.random()-.5)*.4,dy:(Math.random()-.5)*.4,s:6+Math.random()*10,c:col,a:0};
+        const w = canvas.width, h = canvas.height;
+        const cx = w/2, cy = h/2;
+        const angle = Math.random()*Math.PI*2;
+        const radius = Math.random() * (Math.min(w,h)/2 - 8) * (0.45 + Math.random()*0.5);
+        const x = cx + Math.cos(angle)*radius;
+        const y = cy + Math.sin(angle)*radius;
+        return {
+          x, y, baseX:x, baseY:y,
+          vx:(Math.random()-0.5)*0.22, vy:(Math.random()-0.5)*0.22,
+          size:5 + Math.random()*10,
+          hue: palette[Math.floor(Math.random()*palette.length)],
+          pulse: 0.95 + Math.random()*0.9, pd: Math.random()>0.5?1:-1,
+          rot: (Math.random()-0.5)*0.5,
+          alpha: 0
+        };
       }
+
       function draw(){
-        ctx.clearRect(0,0,c.width,c.height);
-        hearts.forEach(h=>{
-          if(h.a<1)h.a+=0.01;
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        ctx.globalCompositeOperation = 'lighter';
+        hearts.forEach((h, i) => {
+          // float motion
+          h.baseX += Math.sin((Date.now()/1000 + i)*0.36)*0.02;
+          h.baseY += Math.cos((Date.now()/1200 + i)*0.31)*0.02;
+          h.x += (h.baseX - h.x)*0.02 + h.vx;
+          h.y += (h.baseY - h.y)*0.02 + h.vy;
+
+          // pulse
+          h.pulse += 0.016*h.pd;
+          if(h.pulse > 1.6) h.pd = -1;
+          if(h.pulse < 0.8) h.pd = 1;
+
+          // fade in
+          if(h.alpha < 1) h.alpha += 0.01;
+
+          // glow
           ctx.save();
-          ctx.translate(h.x,h.y);
-          const g=ctx.createRadialGradient(0,0,0,0,0,h.s*2);
-          g.addColorStop(0,`rgba(${h.c.r},${h.c.g},${h.c.b},${0.5*h.a})`);
-          g.addColorStop(1,`rgba(${h.c.r},${h.c.g},${h.c.b},0)`);
-          ctx.fillStyle=g;
+          ctx.translate(h.x, h.y);
+          ctx.rotate(h.rot);
+          const g = ctx.createRadialGradient(0,0,h.size*0.15,0,0,h.size*1.8);
+          const col = h.hue;
+          g.addColorStop(0, `rgba(${col.r},${col.g},${col.b},${0.54*h.alpha})`);
+          g.addColorStop(0.38, `rgba(${col.r},${col.g},${col.b},${0.25*h.alpha})`);
+          g.addColorStop(1, `rgba(${col.r},${col.g},${col.b},0)`);
+          ctx.fillStyle = g;
           ctx.beginPath();
-          ctx.arc(0,0,h.s,0,Math.PI*2);
+          ctx.arc(0,0,h.size*1.6*(h.pulse/1.05),0,Math.PI*2);
           ctx.fill();
           ctx.restore();
-          h.x+=h.dx; h.y+=h.dy;
-          if(h.x<0||h.x>c.width||h.y<0||h.y>c.height){h.x=c.width/2;h.y=c.height/2;}
+
+          // heart silhouette (simplified for perf)
+          ctx.save();
+          ctx.translate(h.x, h.y);
+          ctx.rotate(h.rot);
+          ctx.fillStyle = `rgba(${col.r},${col.g},${col.b},${0.92*h.alpha})`;
+          const s = h.size/16;
+          ctx.beginPath();
+          ctx.moveTo(0, -8*s);
+          ctx.bezierCurveTo(6*s, -20*s, 24*s, -10*s, 0, 12*s);
+          ctx.bezierCurveTo(-24*s, -10*s, -6*s, -20*s, 0, -8*s);
+          ctx.closePath();
+          ctx.fill();
+          ctx.restore();
         });
         requestAnimationFrame(draw);
       }
-      window.addEventListener('resize',resize);
-      resize();
-      let i=0;const inter=setInterval(()=>{hearts.push(makeHeart());i++;if(i>=max)clearInterval(inter);},150);
-      draw();
+
+      // progressive spawn (slow appear)
+      function spawnSlow(){
+        let count = 0;
+        const interval = setInterval(() => {
+          hearts.push(makeHeart());
+          count++;
+          if(count >= MAX) clearInterval(interval);
+        }, 160);
+      }
+
+      function start(){
+        resize();
+        hearts = [];
+        spawnSlow();
+        draw();
+      }
+
+      window.addEventListener('resize', function(){
+        resize();
+      });
+
+      const img = document.getElementById('mainImg');
+      if(img.complete) start(); else img.addEventListener('load', start);
     })();
   </script>
 </body>
 </html>
+
